@@ -9,6 +9,10 @@
 </template>
 
 <style lang="scss">
+body {
+  margin: 0;
+  overflow: hidden;
+}
 #app {
   font-family: 'Avenir', Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
@@ -19,8 +23,11 @@
 
 #nav {
   padding: 30px;
+  position: fixed;
+  pointer-events: none;
 
   a {
+    pointer-events: auto;
     font-weight: bold;
     color: #2c3e50;
 
