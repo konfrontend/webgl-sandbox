@@ -56,7 +56,7 @@ export function createLight (props = {}) {
   return light
 }
 
-export function createControls (camera, domElement) {
+export function createOrbitControls (camera, domElement) {
   return new OrbitControls(camera, domElement)
 }
 
@@ -65,17 +65,10 @@ export function createCamera (props = {}) {
     fov = 75,
     aspect = 1, // Camera frustum aspect ratio, usually the canvas width / canvas height.
     near = 0.1,
-    far = 1000,
-    position = new Vector3(0, 0, 20)
+    far = 1000
   } = props
 
-  if (!position.isVector3) {
-    position = vectorUtil.toVector3(position)
-  }
-
   const camera = new PerspectiveCamera(fov, aspect, near, far)
-
-  camera.position.copy(position)
 
   return camera
 }

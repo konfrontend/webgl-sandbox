@@ -19,7 +19,7 @@ export default {
     }
   },
   mounted () {
-    this.controls = this.controller.createControls()
+    this.controls = this.controller.createOrbitControls()
   },
   beforeDestroy () {
     if (this.controls) {

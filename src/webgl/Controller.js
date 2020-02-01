@@ -1,4 +1,4 @@
-import { createScene, createRenderer, createControls, createCamera, createLight } from './utils'
+import { createScene, createRenderer, createOrbitControls, createCamera, createLight } from './utils'
 
 class Controller {
   constructor () {
@@ -23,17 +23,17 @@ class Controller {
     return this.scene
   }
 
-  createControls () {
+  createOrbitControls () {
     if (!this.renderer || !this.renderer.domElement) {
       throw new Error('renderer domElement is required')
     } else if (!this.camera) {
       throw new Error('camera is required')
     }
-    this.controls = createControls(this.camera, this.renderer.domElement) // orbitControls
+    this.controls = createOrbitControls(this.camera, this.renderer.domElement) // orbitControls
     return this.controls
   }
 
-  createCamera (position = { x: 10, y: 10, z: 20 }) {
+  createCamera (position) {
     this.camera = createCamera({ aspect: this._width / this._height, position })
     return this.camera
   }
