@@ -13,7 +13,7 @@ npm run build
 # if you are deploying to a custom domain
 # echo 'www.example.com' > CNAME
 echo Deploying..
-git init
+# git init
 git add -A
 git commit -m 'deploy'
 
