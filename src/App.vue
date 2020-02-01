@@ -1,12 +1,21 @@
 <template>
   <div id="app">
-    <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
-    </div>
+    <Nav/>
     <router-view/>
   </div>
 </template>
+
+<script>
+
+import Nav from '@/components/Nav'
+
+export default {
+  name: 'App',
+  components: {
+    Nav
+  }
+}
+</script>
 
 <style lang="scss">
 body {
@@ -20,20 +29,18 @@ body {
   text-align: center;
   color: #2c3e50;
 }
-
-#nav {
-  padding: 30px;
-  position: fixed;
-  pointer-events: none;
-
-  a {
-    pointer-events: auto;
-    font-weight: bold;
-    color: #2c3e50;
-
-    &.router-link-exact-active {
-      color: #42b983;
-    }
-  }
+h3 {
+  margin: 40px 0 0;
+}
+ul {
+  list-style-type: none;
+  padding: 0;
+}
+li {
+  display: inline-block;
+  margin: 0 10px;
+}
+a {
+  color: #42b983;
 }
 </style>

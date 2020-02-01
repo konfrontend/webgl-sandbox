@@ -1,14 +1,10 @@
-<template>
-  <div class="object-3d" :name="name" :type="curObj.type">
-    <slot></slot>
-  </div>
-</template>
-
 <script>
 import * as THREE from 'three'
+import Base from '@/components/webgl/Base'
 
 export default {
   name: 'Object3D',
+  mixins: [Base],
   provide () {
     return {
       parentObj: this.curObj
@@ -17,11 +13,12 @@ export default {
   inject: {
     parentObj: { name: 'parentObj', default: null }
   },
-
   props: {
+    // direct object
+    obj: { type: Object },
+    // ... or construct
     name: { type: String },
     type: { type: String, default: 'Object3D' },
-    obj: { type: Object },
     scale: { type: [Object, Number] }, // { x, y, z }
     position: { type: Object }, // { x, y, z }
     rotation: { type: Object } // { x, y, z }
@@ -34,9 +31,6 @@ export default {
     // https://dotdev.co/peeking-into-vue-js-2-part-1-b457e60c88c6#.918arzkow
     let curObj = this.obj
 
-    console.log('Object3d', { ...this.obj })
-
-    // this.obj = new Object3D() // holder
     if (!curObj) {
       curObj = new THREE[this.type]()
     }
@@ -75,9 +69,8 @@ export default {
   // ready => mounted + (nextTick?)
   // http://rc.vuejs.org/guide/migration.html#ready-deprecated
   mounted () {
-    // console.log({ ...this.$data }, this.curObj)
-
     this.setObj(this.curObj)
+    this.dispatchEvent('moun')
   },
 
   // detached => destroyed + (nextTick?)
@@ -93,20 +86,26 @@ export default {
       // obj.name = obj.name || this.constructor.name
       obj.name = this.name || obj.name || obj.type
 
-      this.setScale(this.scale)
-      Object.assign(obj.position, this.position)
-      Object.assign(obj.rotation, this.rotation)
+      const scale = this.scale || obj.scale
+      const position = this.position || obj.position
+      const rotation = this.rotation || obj.rotation
+
+      this.setScale(scale)
+
+      Object.assign(obj.position, position)
+      Object.assign(obj.rotation, rotation)
 
       if (this.parentObj) {
         this.parentObj.add(obj)
       }
+
       this.$emit('update:obj', obj)
     },
     unsetObj (obj) {
-      this.$emit('update:obj', null)
       if (this.parentObj) {
         this.parentObj.remove(obj)
       }
+      this.$emit('update:obj', null)
     },
     setScale (v) {
       if (v && typeof v === 'number') {
