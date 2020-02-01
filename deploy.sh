@@ -23,4 +23,4 @@ git commit -m 'deploy'
 # if you are deploying to https://<USERNAME>.github.io/<REPO>
 git push -f git@github.com:konfrontend/webgl-sandbox.git master
 
-cd -
+# cd -
