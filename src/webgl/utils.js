@@ -1,5 +1,5 @@
 import { WebGLRenderer, Scene, DirectionalLight, PerspectiveCamera, Vector3 } from 'three'
-import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js'
+import { OrbitControls, MapControls } from 'three/examples/jsm/controls/OrbitControls.js'
 
 export const vectorUtil = {
   multiplyScalar (v, s) {
@@ -31,7 +31,9 @@ export function createRenderer (w, h) {
 
   renderer.setClearColor(0x111111)
   renderer.setSize(w, h)
+  renderer.setPixelRatio(window.devicePixelRatio)
   renderer.name = renderer.type
+
   return renderer
 }
 
@@ -60,6 +62,25 @@ export function createOrbitControls (camera, domElement) {
   return new OrbitControls(camera, domElement)
 }
 
+export function createMapControls (camera, domElement) {
+  const controls = new MapControls(camera, domElement)
+
+  // controls.addEventListener( 'change', render ); // call this only in static scenes (i.e., if there is no animation loop)
+
+  // controls.enableDamping = true // an animation loop is required when either damping or auto-rotation are enabled
+  // controls.dampingFactor = 0.05
+
+  controls.screenSpacePanning = false
+
+  controls.minDistance = 100
+  controls.maxDistance = 500
+
+  controls.maxPolarAngle = Math.PI / 2
+
+  controls.name = 'MAPCONTROLS'
+  return controls
+}
+
 export function createCamera (props = {}) {
   let {
     fov = 75,
@@ -69,6 +90,7 @@ export function createCamera (props = {}) {
   } = props
 
   const camera = new PerspectiveCamera(fov, aspect, near, far)
+  camera.name = 'PERSPECTIVE'
 
   return camera
 }

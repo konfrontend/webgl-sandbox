@@ -14,10 +14,6 @@ export default {
     config: {
       type: Object,
       default: () => ({})
-    },
-    autoStart: {
-      type: Boolean,
-      default: true
     }
   },
   data () {
@@ -33,10 +29,6 @@ export default {
 
   mounted () {
     this.$refs.container.appendChild(this.curObj.domElement)
-
-    if (this.autoStart) {
-      this.controller.animate()
-    }
   }
 }
 </script>

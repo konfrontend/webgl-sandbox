@@ -7,7 +7,6 @@ export default {
   inject: ['controller'],
   data () {
     const curObj = this.controller.createCamera()
-
     return { curObj }
   }
 }
