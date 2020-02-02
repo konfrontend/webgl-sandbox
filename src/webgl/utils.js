@@ -27,7 +27,7 @@ export const vectorUtil = {
 }
 
 export function createRenderer (w, h) {
-  const renderer = new WebGLRenderer({ antialias: true })
+  const renderer = new WebGLRenderer({ antialias: false })
 
   renderer.setClearColor(0x111111)
   renderer.setSize(w, h)

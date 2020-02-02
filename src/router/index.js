@@ -14,6 +14,11 @@ const routes = [
     path: '/panels',
     name: 'panels',
     component: () => import(/* webpackChunkName: "panels" */ '@/views/Panels.vue')
+  },
+  {
+    path: '/basic-shader',
+    name: 'basicShader',
+    component: () => import(/* webpackChunkName: "panels" */ '@/views/BasicShader.vue')
   }
 ]
 

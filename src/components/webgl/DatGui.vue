@@ -27,8 +27,25 @@ export default {
 }
 </script>
 
-<style>
-.dg.main { user-select: none; }
+<style lang="scss">
+  @import "~@/assets/dat.gui.scss";
+
+  .dg.main {
+    .title {
+      font-size: 12px;
+      margin: 0;
+    }
+    .dg .cr {
+      display: block;
+      border-radius: 0;
+      width: 100%;
+    }
+    .dg .property-name {
+      font-size: 1rem;
+    }
+    user-select: none;
+
+  }
 </style>
 
 <style scoped>
